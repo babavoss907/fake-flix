@@ -1,6 +1,7 @@
 import requests
+import os
 
-API_KEY = 'AIzaSyDH7JULgAeL2Q9qlDJhWQbL8hXtoVNic0o'
+API_KEY = os.getenv("API_KEY")
 API_URL = 'https://www.googleapis.com/youtube/v3'
 
 # youtube_api.py
