@@ -1,0 +1,92 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fakeflix</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .category {
+            margin-bottom: 30px;
+        }
+        .category-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .video-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .video-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .video-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            margin: 0;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .video-item:hover .video-title {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fakeflix</h1>
+        {% for category, videos in categories.items() %}
+            <div class="category">
+                <h2 class="category-title">{{ category }}</h2>
+                <ul class="videos">
+                    {% for video in videos %}
+                        <li class="video-item">
+                            <a href="https://www.youtube.com/watch?v={{ video['id'] }}" target="_blank">
+                                <img src="{{ video['snippet']['thumbnails']['medium']['url'] }}" alt="{{ video['snippet']['title'] }}">
+                                <div class="video-details">
+                                    <p class="video-title">{{ video['snippet']['title'] }}</p>
+                                    <p class="video-description">{{ video['snippet']['description'] }}</p>
+                                    <p class="video-views">Views: {{ video['statistics']['viewCount'] }}</p>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
